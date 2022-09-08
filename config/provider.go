@@ -23,12 +23,16 @@ import (
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/crossplane-contrib/provider-jet-template/config/null"
+	"github.com/Teja446/githubprov/config/actions_environment_secret"
+	"github.com/Teja446/githubprov/config/branch"
+	"github.com/Teja446/githubprov/config/organization"
+	"github.com/Teja446/githubprov/config/repository"
+	"github.com/Teja446/githubprov/config/user"
 )
 
 const (
-	resourcePrefix = "template"
-	modulePath     = "github.com/crossplane-contrib/provider-jet-template"
+	resourcePrefix = "githubprov"
+	modulePath     = "github.com/Teja446/githubprov"
 )
 
 //go:embed schema.json
@@ -44,11 +48,21 @@ func GetProvider() *tjconfig.Provider {
 	}
 
 	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), resourcePrefix, modulePath,
-		tjconfig.WithDefaultResourceFn(defaultResourceFn))
+		tjconfig.WithDefaultResourceFn(defaultResourceFn), tjconfig.WithIncludeList([]string{
+			"github_branch$",
+			"github_organization$",
+			"github_user$",
+			"github_actions_environment_secret$",
+			"github_repository$",
+		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		branch.Configure,
+		organization.Configure,
+		user.Configure,
+		actions_environment_secret.Configure,
+		repository.Configure,
 	} {
 		configure(pc)
 	}

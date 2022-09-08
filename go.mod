@@ -1,4 +1,4 @@
-module github.com/crossplane-contrib/provider-jet-template
+module github.com/Teja446/githubprov
 
 go 1.17
 
