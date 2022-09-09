@@ -9,8 +9,8 @@ export TERRAFORM_VERSION := 1.1.6
 export TERRAFORM_PROVIDER_SOURCE := integrations/github
 export TERRAFORM_PROVIDER_VERSION := 4.31.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-github
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/integrations/terraform-provider-github/releases/download/v4.31.0
-export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-github_4.31.0
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://releases.hashicorp.com/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/$(TERRAFORM_PROVIDER_VERSION)
+export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-github_v4.31.0
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
